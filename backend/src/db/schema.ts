@@ -28,7 +28,7 @@ export const products = pgTable('products', {
 
 export const comments = pgTable("comments", {
     id: uuid("id").defaultRandom().primaryKey(),
-    consent: text("consent").notNull(),
+    content: text("content").notNull(),
     userId: text('user_id').notNull().references(() => users.id, { onDelete: "cascade" }),
     productId: uuid('productId').notNull().references(() => products.id, { onDelete: "cascade" }),
     createdAt: timestamp('created_at', { mode: "date" }).notNull().defaultNow(),
