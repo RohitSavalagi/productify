@@ -8,7 +8,9 @@ import {
     type NewComment,
     type NewProduct,
 } from './schema';
-import e from 'express';
+
+type UpdateUserInput = Partial<Pick<NewUser, 'email' | 'name' | 'imageUrl'>>;
+type UpdateProductInput = Partial<Pick<NewProduct, 'title' | 'description' | 'imageUrl'>>;
 
 export const createUser = async (data: NewUser) => {
     const [user] = await db.insert(users).values(data).returning();
@@ -19,7 +21,7 @@ export const getUserById = async (id: string) => {
     return db.query.users.findFirst({ where: eq(users.id, id) });
 }
 
-export const updateUser = async(id: string, data: Partial<NewUser>) => {
+export const updateUser = async(id: string, data: UpdateUserInput) => {
     const [user] = await db.update(users).set(data).where(eq(users.id, id)).returning();
     return user;
 }
@@ -66,7 +68,7 @@ export const getProductsByUserId = async (userId: string) => {
     });
 }
 
-export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
+export const updateProduct = async (id: string, data: UpdateProductInput) => {
     const [product] = await db.update(products).set(data).where(eq(products.id, id)).returning();
     return product;
 }
