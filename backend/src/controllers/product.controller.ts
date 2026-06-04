@@ -58,15 +58,13 @@ export async function createProduct(req: Request, res: Response) {
         const { userId } = getAuth(req);
 
         if (!userId) {
-            res.status(401).json({
+            return res.status(401).json({
                 error: "Unauthorized"
             });
-            return;
         }
 
         if (!description || !imageUrl || !title) {
-            res.status(400).json({ error: "Title, description and imageURL are required" });
-            return;
+            return res.status(400).json({ error: "Title, description and imageURL are required" });
         }
 
         const product = await queries.createProduct({
@@ -76,7 +74,7 @@ export async function createProduct(req: Request, res: Response) {
             userId
         });
 
-        res.status(201).json(product);
+        return res.status(201).json(product);
     } catch(error) {
          console.error("Error creating product:", error);
         return res.status(500).json({ error: "Failed to create product" });
@@ -88,10 +86,9 @@ export async function updateProduct(req: Request, res:Response) {
         const { userId } = getAuth(req);
 
         if (!userId) {
-            res.status(401).json({
+            return res.status(401).json({
                 error: "Unauthorized"
             });
-            return;
         }
 
         const { id } = req.params;
@@ -105,10 +102,9 @@ export async function updateProduct(req: Request, res:Response) {
         }
 
         if (existingProduct.userId !== userId) {
-            res.status(403).json({
+            return res.status(403).json({
                 error: "you can only update your own products"
             });
-            return;
         }
 
         const product = await queries.updateProduct(id as string, {
@@ -117,10 +113,10 @@ export async function updateProduct(req: Request, res:Response) {
             imageUrl,
         })
 
-        res.status(200).json(product);
+        return res.status(200).json(product);
     } catch(error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             error: "Failed to update product"
         });
     }
