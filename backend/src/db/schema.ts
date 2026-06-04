@@ -27,7 +27,10 @@ export const comments = pgTable("comments", {
     consent: text("consent").notNull(),
     userId: text('user_id').notNull().references(() => users.id, { onDelete: "cascade" }),
     productId: uuid('productId').notNull().references(() => products.id, { onDelete: "cascade" }),
-    createdAt: timestamp('created_at', { mode: "date" }).notNull().defaultNow(),
+    createdAt: timestamp('created_at', { mode: "date" })
+        .notNull()
+        .defaultNow()
+        .$onUpdate(() => new Date()),
 });
 
 // a user can have many products and comments
