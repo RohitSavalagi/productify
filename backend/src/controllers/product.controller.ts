@@ -23,7 +23,7 @@ export async function getMyProducts(req: Request, res: Response) {
             });
         }
 
-        const products = queries.getProductsByUserId(userId);
+        const products = await queries.getProductsByUserId(userId);
         return res.status(200).json(products);
     } catch(error) {
         console.error("Error getting user products");
@@ -77,8 +77,9 @@ export async function createProduct(req: Request, res: Response) {
         });
 
         res.status(201).json(product);
-    } catch {
-
+    } catch(error) {
+         console.error("Error creating product:", error);
+        return res.status(500).json({ error: "Failed to create product" });
     }
 }
 
@@ -98,7 +99,7 @@ export async function updateProduct(req: Request, res:Response) {
 
         const existingProduct = await queries.getProductById(id as string);
         if (!existingProduct) {
-            res.status(404).json({
+            return res.status(404).json({
                 error: `product with id ${id} is not found`
             });
         }

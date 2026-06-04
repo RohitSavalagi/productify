@@ -28,7 +28,7 @@ export async function syncUser(req: Request, res: Response) {
         return res.status(200).json(user);
     } catch(error) {
         console.error("Error syncing the user:", error);
-        return res.json({
+        return res.status(500).json({
             error: 'Error syncing the user'
         })
     }

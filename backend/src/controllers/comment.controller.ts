@@ -67,7 +67,7 @@ export const deleteComment = async (req: Request, res: Response) => {
 
         await queries.deleteComment(commentId as string);
 
-        return res.status(20).json({
+        return res.status(204).json({
             message: "Comment deleted successfully"
         });
     } catch (error) {
