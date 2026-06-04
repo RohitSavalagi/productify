@@ -1,4 +1,6 @@
+import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
+import * as schema from './schema';
 import { ENV } from "src/config/env";
 
 if (!ENV.DATABASE_URL) {
@@ -16,6 +18,8 @@ pool.on("connect", () => {
 pool.on('error', (err) => {
     console.error("💥 Database connection error:", err);
 });
+
+export const db = drizzle({ client: pool, schema });
 
 // what is Connection pool
 // a connection pool is a cache of database connections that are kept open and reused,
