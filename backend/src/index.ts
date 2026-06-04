@@ -4,6 +4,7 @@ import { clerkMiddleware } from '@clerk/express';
 import cors from 'cors';
 
 const app = express();
+
 app.use(cors({ origin: ENV.FE_URL }));
 app.use(clerkMiddleware()); // auth obj will be attached to the req
 app.use(express.json()); // parse json
@@ -14,7 +15,7 @@ app.get('/', (req, res) => {
         "message": "Welcome to product IFY API - pg drizzle clerk",
         "endpoints": {
             "users": "/api/users",
-            products: "/api/products",
+            "products": "/api/products",
             "comments": "/api/comments"
         }
     })

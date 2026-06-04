@@ -26,6 +26,6 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/index.ts", "drizzle.config.ts"],
   "exclude": ["node_modules"]
 }
