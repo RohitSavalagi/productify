@@ -26,7 +26,8 @@ export const getMyProducts = async () => {
 }
 
 export const createProduct = async (productData) => {
-    const { data } = await api.post(productData, productData);
+    console.log(productData);
+    const { data } = await api.post("/products", productData);
     return data;
 }
 
