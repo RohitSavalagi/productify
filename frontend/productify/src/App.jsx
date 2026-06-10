@@ -1,4 +1,3 @@
-import { Show, SignInButton, SignOutButton, SignUpButton, UserButton } from "@clerk/react";
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
@@ -29,19 +28,6 @@ function App() {
           <Route path="/edit/:id" element={<EditProductPage />}></Route>
         </Routes>
       </main>
-      {/* <h1>Hello World</h1>
-      <button className="btn btn-primary">Click me</button>
-
-      <header>
-        <Show when="signed-out">
-          <SignInButton mode="modal" />
-          <SignUpButton mode="modal" />
-        </Show>
-        <Show when="signed-in">
-          <UserButton />
-          <SignOutButton />
-        </Show>
-      </header> */}
     </div>
   )
 }
