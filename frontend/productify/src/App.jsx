@@ -1,4 +1,3 @@
-import { Show, SignInButton, SignOutButton, SignUpButton, UserButton } from "@clerk/react";
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
@@ -6,8 +5,17 @@ import ProductPage from "./pages/ProductPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreatePage from "./pages/CreatePage";
 import EditProductPage from "./pages/EditProductPage";
+import useAuthReq from './hooks/useAuthReq';
+import useUserSync from './hooks/useUserSync';
 
 function App() {
+  const { isClerkLoaded, isSignedIn } = useAuthReq();
+  useUserSync();
+
+  if(!isClerkLoaded) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-base-100">
       <Navbar></Navbar>
@@ -20,19 +28,6 @@ function App() {
           <Route path="/edit/:id" element={<EditProductPage />}></Route>
         </Routes>
       </main>
-      {/* <h1>Hello World</h1>
-      <button className="btn btn-primary">Click me</button>
-
-      <header>
-        <Show when="signed-out">
-          <SignInButton mode="modal" />
-          <SignUpButton mode="modal" />
-        </Show>
-        <Show when="signed-in">
-          <UserButton />
-          <SignOutButton />
-        </Show>
-      </header> */}
     </div>
   )
 }
