@@ -27,7 +27,7 @@ function App() {
           <Route path="/profile" element={isSignedIn ? <ProfilePage /> : <Navigate to={"/"} />} />
           {/* <Route path="/create" element={<CreatePage />}></Route> */}
           <Route path="/create" element={isSignedIn ? <CreatePage /> : <Navigate to={"/"} />} />
-          <Route path="/edit/:id" element={<EditProductPage />}></Route>
+          <Route path="/edit/:id" element={isSignedIn ? <EditProductPage /> : <Navigate to={"/"} />}></Route>
         </Routes>
       </main>
     </div>
