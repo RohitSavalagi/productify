@@ -32,7 +32,7 @@ export const createProduct = async (productData) => {
 }
 
 export const updateProduct = async ({id, ...productData}) => {
-    const { data } = await api.put(`/productData/${id}`, productData);
+    const { data } = await api.put(`/products/${id}`, productData);
     return data;
 }
 
